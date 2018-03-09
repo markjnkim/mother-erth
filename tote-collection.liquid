@@ -1,0 +1,39 @@
+{% comment %}
+Create Auto-collection with custom handle ie. tote collection
+Add collection with handle reviews-tote
+Conditions: Product Price > 0
+Description = "Tote Reviews"
+
+Then modify the collection.liquid pg to display tote reviews
+if the collection handle is "reviews-tote"
+{% endcomment %}
+
+{%- if product.title contains 'Tote' -%}
+
+{%- endif -%}
+
+
+{% elsif collection.handle == 'reviews-tote' %}
+  {% assign products = collection.products %}
+  {% assign products_per_row = 1 %}
+  {% include 'product-loop' with settings.collection_sidebar %}
+  {% endif %}
+
+  {% if collection.handle == "reviews-tote" %}
+     <div class="collection-reviews">
+        {% if product.metafields.spr.reviews %}
+           <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+           <h4><span class="title">{{ product.title }}</span></h4>
+           </a>
+  	 <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+        {% endif %}
+     </div>
+  {% else %}
+
+
+  {% comment %}
+Review Badge
+Review Body
+  {% endcomment %}
+  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}”></span>
+  <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
